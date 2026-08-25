@@ -1074,7 +1074,7 @@ footer .legal { margin-top: 36px; padding-top: 24px; border-top: 1px solid var(-
         <div class="panel sched-panel reveal">
           <div class="panel-head">
             <h3>Pick a time</h3>
-            <p>An hour with Chase. Nothing is sold on this call — it is a conversation about
+            <p>A first meeting with Chase. Nothing is sold on it — it is a conversation about
             where you are and what questions you are facing.</p>
           </div>
           <div class="sched-frame-pad">
@@ -1082,17 +1082,19 @@ footer .legal { margin-top: 36px; padding-top: 24px; border-top: 1px solid var(-
                  The height is fixed in CSS and has to be maintained by hand: a cross-origin
                  iframe cannot size itself, and Calendly's booking page does not post the
                  `calendly.page_height` message this account would need for auto-sizing.
-                 The slug is still `30min` — that is the real, live event type, even though it
-                 is configured for 60 minutes. Renaming it here 404s unless it is renamed in
-                 Calendly first.
+                 The slug is `30min` but the event type is configured for 60 minutes. The slug
+                 shows only in the URL, never to a visitor reading the page, so it is left alone;
+                 renaming it here 404s unless it is renamed in Calendly first.
                  Keep the query string. The three color params map Calendly onto this page's
                  black-and-white palette (verified: grey text, black month chevrons, not
                  Calendly's default blue).
-                 `hide_event_type_details=1` is deliberately NOT set. It would drop Calendly's
-                 header block and about 200px with it, but that block is where the firm's logo
-                 renders, and per Chase the logo on the scheduler is worth more than the height.
-                 The trade was made knowingly: the frame is shorter than its content and the
-                 booking page scrolls inside it. Do not "fix" that by re-adding the param.
+                 `hide_event_type_details=1` is deliberately NOT set. Keeping Calendly's header
+                 block visible is intentional: it shows the firm's logo AND states the event's
+                 real duration, so the header — not the page copy — is the single source of truth
+                 for how long the meeting is. That is why the panel copy says "a first meeting"
+                 and names no length: change the duration in Calendly and nothing here goes stale.
+                 The cost is ~200px of header height; the frame is shorter than its content and
+                 the booking page scrolls inside it. Do not "fix" that by re-adding the param.
                  Do NOT add a `month=` param either — it pins the calendar to a fixed month
                  instead of opening on the current one. Calendly appends its own once the frame
                  is live; that is fine, it is the initial src that matters. -->

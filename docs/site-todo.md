@@ -181,18 +181,15 @@ holds again and no file loads external JS.
 The cost is that `.sched-frame`'s height is hand-maintained: `700px`, with a `max-width: 760px`
 query taking it to `780px` for Calendly's stacked layout. Both are for the **60-minute** event.
 
-The embed also runs `hide_event_type_details=1`, which drops Calendly's header block — their
-logo, "Chase Dalton", "60 Minute Meeting", the duration and the office address. All of it was
-already on the page in the panel head and the form rail, so it read as duplication, and it was
-worth roughly 200px of frame height. What remains measures ~575px on first paint.
-
-The firm's logo is wanted on the scheduler, so it is back — but as `.sched-logo` in the panel
-head, from `assets/Light-Email-Logo.png`, rather than by un-hiding Calendly's header. That keeps
-the height, puts the mark in this page's palette and spacing, and costs ~40px instead of ~200px.
-Its `alt` is empty by design; the app bar and footer already announce the firm name. The heights
-above are set for the **date-selected** state instead, where the time-slot list appears below
-the calendar — that is the state that overflows, and `700px` is Calendly's documented floor for
-it. Click a date before judging whether a height is right.
+`hide_event_type_details=1` is deliberately **NOT** set, so Calendly's header block stays visible
+— firm logo, "Chase Dalton", the event name, the duration, the office address. That is on purpose:
+the header authoritatively states how long the meeting is, so the header (not the page copy) is the
+single source of truth for duration. The panel copy therefore says "a first meeting" and names no
+length — change the duration in Calendly and nothing in the markup goes stale. It costs ~200px of
+header height, and the frame is left shorter than its content so the booking page scrolls inside it.
+The fixed heights are set for the **date-selected** state, where the time-slot list appears below
+the calendar — that is the state that overflows, and `700px` is Calendly's documented floor. Click
+a date before judging whether a height is right.
 
 The three color params do work, contrary to an earlier note here: verified grey text and black
 month chevrons rather than Calendly's default blue. Branding beyond those params (the "POWERED
@@ -210,10 +207,12 @@ BY Calendly" ribbon) is a plan-level feature and not reachable from the embed UR
 - [ ] **Eyeball the two fixed heights, with a date selected.** `700px` desktop / `780px` below
   760px. The opening view fits easily; the time-slot list that appears after clicking a date is
   what overflows. Too short clips it, too tall leaves dead white space above `.sched-note`.
-- [ ] **The event slug no longer matches its duration.** `cdalton-chasewm/30min` is configured
-  in Calendly as a **60 Minute Meeting**, and both pages' copy now says an hour. The slug is
-  left alone because renaming it in the markup 404s unless it is renamed in Calendly first.
-  Worth tidying on the Calendly side so the URL stops lying.
+- [ ] **The event slug doesn't match its duration.** `cdalton-chasewm/30min` is configured in
+  Calendly as a **60 Minute Meeting**. This is no longer visitor-facing: the page copy names no
+  duration and Calendly's shown header states the real length, so the slug shows only in the URL.
+  Left alone because renaming it in the markup 404s unless it is renamed in Calendly first — still
+  worth tidying on the Calendly side so the URL stops lying, but it is cosmetic now, not a mismatch
+  a visitor can see.
 - [ ] **The `.sched-note` fallback still matters.** An ad blocker that blocks calendly.com now
   leaves a broken iframe rather than an empty div, but either way the "Calendar not loading?"
   line and its direct calendly.com link are the only remaining path to booking. Do not trim
@@ -230,7 +229,7 @@ BY Calendly" ribbon) is a plan-level feature and not reachable from the embed UR
   the contact form gets is a second processor with the same problem.
 
 **Compliance:** the scheduler itself asserts nothing, so it is outside the SEC/FINRA
-advertising-rule gate. The section copy around it is not — "An hour with Chase" and
-"Nothing is sold on this call" are marketing claims and need the same review as the rest of the
+advertising-rule gate. The section copy around it is not — "A first meeting with Chase" and
+"Nothing is sold on it" are marketing claims and need the same review as the rest of the
 page. Anything the event type's own description says on Calendly is published marketing copy too,
 and it lives outside this repo where the review step cannot see it.
