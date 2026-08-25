@@ -120,6 +120,60 @@
           "recognizedBy": { "@type": "CollegeOrUniversity", "name": "Pittsburg State University" }
         }
       ]
+    },
+    {
+      "@type": "FAQPage",
+      "@id": "https://vandyssoftware.github.io/chase-wealth/#faq",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "What does \"fee-only\" mean, and how do you get paid?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "You pay one annual advisory fee, charged as a percentage of the assets we manage — and nothing else. No commissions, no product sales, and no third party paying us on the side. That is what \"fee-only\" means, and it is the reason no recommendation can quietly pay us more than another. The full rate is on our fee schedule and is set out in your advisory agreement before you sign anything."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Are you a fiduciary?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes, always. As a state-registered investment adviser, Chase Wealth Management is held to a fiduciary standard and is required to act in your best interest. Because the only person paying us is you, that duty and how we are paid point the same direction."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What services do you offer?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Six areas, handled together in one written plan: financial planning, tax planning, investments, business planning & analysis, legacy & estate planning, and liability & risk. They are coordinated rather than sold separately, because they do not behave like separate problems — a tax decision is an investment decision is an estate decision."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Do you prepare my tax return?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "No. Tax planning here means working the highest-impact decisions through beforehand — asset location, when income lands, when gains are realized — rather than explaining them after. Your CPA files the return; the planning comes first, and the two are meant to work together."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Do you draft my will or trust?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "No. Your attorney drafts the legal documents. Our part is making sure your account titling and beneficiary designations actually agree with what those documents say — because they only do their work if the accounts have been told about them."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How do we get started, and what does a first meeting cost?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "It starts with a conversation at no cost and no obligation — a chance to map where you are and see whether we are the right fit. Nothing is sold on it. From there we build your written plan and model portfolio and walk you through it line by line, then keep it current as your life, your business, or the law changes the inputs."
+          }
+        }
+      ]
     }
   ]
 }
@@ -515,6 +569,78 @@ header {
   text-align: center;
 }
 
+/* ---------- FAQ ---------- */
+/* Native <details> accordions: no JS, keyboard-accessible, and each summary's text is
+   the same string mirrored into the FAQPage schema — keep the two in sync if either changes. */
+.faq { padding: 88px 0 0; }
+.faq-list { max-width: 760px; margin: 0 auto; }
+.faq-item {
+  background: var(--surface);
+  border: 1px solid var(--outline);
+  border-radius: var(--r-md);
+  box-shadow: var(--e1);
+  margin-bottom: 14px;
+  overflow: hidden;
+}
+.faq-item summary {
+  list-style: none; cursor: pointer;
+  display: flex; align-items: center; justify-content: space-between; gap: 20px;
+  padding: 22px 26px;
+  font-family: var(--display);
+  font-size: clamp(18px, 2.2vw, 21px); font-weight: 600;
+  color: var(--ink); letter-spacing: -0.01em;
+  transition: background 0.2s ease;
+}
+.faq-item summary::-webkit-details-marker { display: none; }
+.faq-item summary:hover { background: var(--surface-tonal); }
+.faq-item summary .chev {
+  flex: none; width: 22px; height: 22px; color: var(--muted);
+  transition: transform 0.25s ease;
+}
+.faq-item[open] summary .chev { transform: rotate(180deg); }
+.faq-a { padding: 0 26px 24px; color: var(--body); max-width: 64ch; }
+.faq-a p { margin: 0; }
+.faq-a a { color: var(--primary); font-weight: 600; text-decoration: underline; text-underline-offset: 3px; }
+@media (max-width: 560px) {
+  .faq-item summary { padding: 18px 20px; }
+  .faq-a { padding: 0 20px 20px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .faq-item summary .chev { transition: none; }
+}
+
+/* ---------- Reviews ---------- */
+/* PLACEHOLDER SECTION — not for publish. See the block comment on the markup below. */
+/* Top padding kept low on purpose: .philosophy already contributes 80px of bottom padding
+   above this, so the gap to the quote is that 80px + this. */
+.reviews { padding: 24px 0 0; }
+.review-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 24px; }
+@media (max-width: 860px) { .review-grid { grid-template-columns: 1fr; max-width: 520px; margin: 0 auto; } }
+.review {
+  background: var(--surface);
+  border-radius: var(--r-md);
+  box-shadow: var(--e2);
+  padding: 30px 30px 28px;
+  display: flex; flex-direction: column; gap: 16px;
+}
+.review .mark {
+  font-family: var(--display); font-size: 56px; line-height: 0.5; height: 26px; color: var(--ink);
+}
+.review blockquote {
+  margin: 0; font-size: 18px; font-weight: 600; color: var(--ink);
+  line-height: 1.55; letter-spacing: -0.01em;
+}
+.review .who { margin-top: auto; padding-top: 6px; display: flex; flex-direction: column; gap: 3px; }
+.review cite {
+  font-style: normal; font-size: 13px; font-weight: 700;
+  letter-spacing: 0.1em; text-transform: uppercase; color: var(--primary);
+}
+.review .who span { font-size: 13px; color: var(--muted); }
+.reviews-note {
+  max-width: 720px; margin: 30px auto 0; text-align: center;
+  font-size: 13px; line-height: 1.7; color: var(--muted);
+}
+
 /* ---------- Philosophy: stance row + quote ---------- */
 .philosophy { padding: 96px 0 80px; }
 /* Deliberately NOT a dark band. Windle reserves its single inversion for the CTA; here that
@@ -697,6 +823,7 @@ footer .legal { margin-top: 36px; padding-top: 24px; border-top: 1px solid var(-
       <a href="#services">Services</a>
       <a href="#process">How it works</a>
       <a href="#fees">Fees</a>
+      <a href="#faq">FAQ</a>
       <a href="#contact">Contact</a>
     </nav>
     <a class="btn filled" href="#schedule">Book a free call</a>
@@ -1060,6 +1187,139 @@ footer .legal { margin-top: 36px; padding-top: 24px; border-top: 1px solid var(-
     </div>
   </section>
 
+  <!-- ==================================================================================
+       REVIEWS — PLACEHOLDER, NOT FOR PUBLISH.
+       Every quote and every attribution below is STUBBED (bracketed) sample content. This
+       section must NOT go live until real, client-supplied testimonials exist and clear
+       SEC/FINRA advertising review, because third-party testimonials trigger the SEC
+       Marketing Rule: required disclosures (whether the person is a current client, whether
+       they were compensated, and any material conflicts) must accompany them, and the firm
+       has prohibited publishing any testimonial without that corpus in place.
+       Deliberately absent, and must stay absent until the above is satisfied:
+         - star ratings and any AggregateRating (the firm prohibits an aggregate rating);
+         - Review / AggregateRating JSON-LD (adding schema for fabricated or
+           disclosure-incomplete testimonials is worse than none — do not add it here).
+       Also not wired: no "#reviews" link in the primary nav, on purpose, so this stays
+       unpromoted until it is real. Replace the brackets, add the disclosure line, run it
+       through review, THEN add schema + nav.
+       ================================================================================== -->
+  <section class="reviews" id="reviews">
+    <div class="wrap">
+      <div class="sec-head" style="text-align:center; margin-inline:auto;">
+        <span class="label reveal">Reviews</span>
+        <h2 class="reveal">What clients say</h2>
+        <p class="reveal">In their words — on what it's like to work with a fee-only advisor whose
+        only client is you.</p>
+      </div>
+      <div class="review-grid">
+        <article class="review reveal">
+          <div class="mark" aria-hidden="true">&ldquo;</div>
+          <blockquote>We came in with accounts scattered across five places and left with one
+          written plan. Chase walked us through every line until it made sense — and nothing was ever
+          being sold to us.</blockquote>
+          <div class="who">
+            <cite>[First name L.]</cite>
+            <span>[Client since 20XX]</span>
+          </div>
+        </article>
+        <article class="review reveal">
+          <div class="mark" aria-hidden="true">&ldquo;</div>
+          <blockquote>The fee is one number, in writing, and it doesn't move based on what we own.
+          After years of never quite knowing how our old advisor got paid, that clarity was the whole
+          reason we switched.</blockquote>
+          <div class="who">
+            <cite>[First name L.]</cite>
+            <span>[Retired · Kansas City]</span>
+          </div>
+        </article>
+        <article class="review reveal">
+          <div class="mark" aria-hidden="true">&ldquo;</div>
+          <blockquote>He coordinated the tax side with our CPA before year-end instead of after.
+          That kind of planning ahead is exactly what we'd been missing.</blockquote>
+          <div class="who">
+            <cite>[First name L.]</cite>
+            <span>[Business owner]</span>
+          </div>
+        </article>
+      </div>
+      <p class="reviews-note reveal">[ Placeholder reviews — content and attribution are stubbed.
+      Testimonial disclosures required by the SEC Marketing Rule (client status, whether compensated,
+      and material conflicts) to appear here before publishing. ]</p>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <!-- Every answer here is a compressed restatement of copy that already exists elsewhere on the
+       page (hero, services cards, process, fees, stance), so nothing new is asserted that hasn't
+       been through the same advertising-rule review. Each summary string is mirrored verbatim into
+       the FAQPage JSON-LD in <head>; Google requires the on-page and schema text to match, so edit
+       both together. Two candidate questions — account minimum and states registered — are held out
+       deliberately until the client confirms the facts. -->
+  <section class="faq" id="faq">
+    <div class="wrap">
+      <div class="sec-head" style="text-align:center; margin-inline:auto;">
+        <span class="label reveal">FAQ</span>
+        <h2 class="reveal">Questions people ask first</h2>
+      </div>
+      <div class="faq-list">
+        <details class="faq-item reveal">
+          <summary>What does "fee-only" mean, and how do you get paid?<svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></summary>
+          <div class="faq-a">
+            <p>You pay one annual advisory fee, charged as a percentage of the assets we manage — and
+            nothing else. No commissions, no product sales, and no third party paying us on the side.
+            That is what "fee-only" means, and it is the reason no recommendation can quietly pay us
+            more than another. The full rate is on our <a href="#fees">fee schedule</a> and is set out
+            in your advisory agreement before you sign anything.</p>
+          </div>
+        </details>
+        <details class="faq-item reveal">
+          <summary>Are you a fiduciary?<svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></summary>
+          <div class="faq-a">
+            <p>Yes, always. As a state-registered investment adviser, Chase Wealth Management is held
+            to a fiduciary standard and is required to act in your best interest. Because the only
+            person paying us is you, that duty and how we are paid point the same direction.</p>
+          </div>
+        </details>
+        <details class="faq-item reveal">
+          <summary>What services do you offer?<svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></summary>
+          <div class="faq-a">
+            <p>Six areas, handled together in one written plan: financial planning, tax planning,
+            investments, business planning &amp; analysis, legacy &amp; estate planning, and liability
+            &amp; risk. They are coordinated rather than sold separately, because they do not behave
+            like separate problems — a tax decision is an investment decision is an estate decision.</p>
+          </div>
+        </details>
+        <details class="faq-item reveal">
+          <summary>Do you prepare my tax return?<svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></summary>
+          <div class="faq-a">
+            <p>No. Tax planning here means working the highest-impact decisions through beforehand —
+            asset location, when income lands, when gains are realized — rather than explaining them
+            after. Your CPA files the return; the planning comes first, and the two are meant to work
+            together.</p>
+          </div>
+        </details>
+        <details class="faq-item reveal">
+          <summary>Do you draft my will or trust?<svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></summary>
+          <div class="faq-a">
+            <p>No. Your attorney drafts the legal documents. Our part is making sure your account
+            titling and beneficiary designations actually agree with what those documents say —
+            because they only do their work if the accounts have been told about them.</p>
+          </div>
+        </details>
+        <details class="faq-item reveal" id="faq-getting-started">
+          <summary>How do we get started, and what does a first meeting cost?<svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></summary>
+          <div class="faq-a">
+            <p>It starts with a conversation at no cost and no obligation — a chance to map where you
+            are and see whether we are the right fit. Nothing is sold on it. From there we build your
+            written plan and model portfolio and walk you through it line by line, then keep it current
+            as your life, your business, or the law changes the inputs. <a href="#schedule">Book a free
+            call</a> whenever you are ready.</p>
+          </div>
+        </details>
+      </div>
+    </div>
+  </section>
+
   <!-- Get started: scheduler and form side by side -->
   <section class="connect" id="schedule">
     <div class="wrap-wide">
@@ -1075,7 +1335,7 @@ footer .legal { margin-top: 36px; padding-top: 24px; border-top: 1px solid var(-
           <div class="panel-head">
             <h3>Pick a time</h3>
             <p>A first meeting with Chase. Nothing is sold on it — it is a conversation about
-            where you are and what questions you are facing.</p>
+            where you are and what questions you are facing. <a class="textlink" href="#faq-getting-started">What to expect <span class="arrow">→</span></a></p>
           </div>
           <div class="sched-frame-pad">
             <!-- Calendly's plain iframe embed — no widget.js, so the page stays self-contained.
@@ -1176,8 +1436,8 @@ footer .legal { margin-top: 36px; padding-top: 24px; border-top: 1px solid var(-
         <a href="#process">How it works</a>
         <a href="#fees">Fees</a>
         <a href="#contact">Contact</a>
-        <!-- TODO: swap for the firm's direct IAPD/Form ADV link once the CRD number is issued. -->
-        <a href="https://adviserinfo.sec.gov/" rel="noopener">Form ADV</a>
+        <!-- Chase Dalton's IAPD record, IAR CRD #7493251. Keep this in sync with about.html. -->
+        <a href="https://adviserinfo.sec.gov/individual/summary/7493251" rel="noopener">Form ADV</a>
       </nav>
     </div>
     <p class="legal">Chase Wealth Management is a state-registered investment adviser. Registration
