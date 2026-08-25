@@ -552,9 +552,9 @@ header {
 
 /* ---------- Connect: scheduler and form, side by side ---------- */
 .connect { padding: 88px 0 100px; }
-/* Wider than the page's 1120px rhythm on purpose. The booking iframe drops to a stacked
-   mobile layout on narrow widths (~680px was Calendly's threshold; re-check Cal.com's), so the
-   scheduler column has to clear that while the form rail still gets a usable width.
+/* Wider than the page's 1120px rhythm on purpose. Calendly's iframe drops to its stacked
+   mobile layout below ~680px wide, so the scheduler column has to clear that while the form
+   rail still gets a usable width.
    Two-column iframe width = viewport - 64 (wrap padding) - 28 (gap) - 400 (rail) - 16
    (frame padding) = viewport - 508, capped by the 1320px wrap. Collapsing at 1240px leaves
    733px at the narrowest two-column width — clear of the threshold with room to spare. */
@@ -578,15 +578,16 @@ header {
 .panel-head { padding: 28px 32px 20px; }
 .panel-head p { margin: 0; font-size: 14.5px; color: var(--muted); }
 .sched-frame-pad { padding: 0 8px; }
-/* Cal.com's booking page in a plain cross-origin iframe, so the height is ours to maintain:
+/* Calendly's booking page in a plain cross-origin iframe, so the height is ours to maintain:
    the frame cannot measure its own content and there is no resize message to listen for.
-   The frame is deliberately allowed to be shorter than its content — the booking page scrolls
-   inside it rather than giving the section that much height. So: expect a scrollbar in there,
-   and do not read one as a bug. Judge the height with a date AND a duration selected — that is
-   the worst case (duration picker + time-slot list both expanded).
-   WARNING: 700/780px were tuned for Calendly's 60-minute page and are carried over unverified.
-   Cal.com's layout — and the new duration-picker step on /virtual — is a different height.
-   Re-measure against the live embed and adjust these two numbers. */
+   These heights are deliberately shorter than the content. Calendly's event-details header is
+   left visible so the firm's logo shows on the scheduler, which costs ~200px, and the decision
+   was to let the booking page scroll inside the frame rather than give the section that height
+   back. So: expect a scrollbar in there, and do not read one as a bug.
+   700px is Calendly's documented floor and the point below which the calendar stops being
+   usable rather than merely scrolled; 780px covers the taller stacked layout. Judge them with
+   a date selected — that appends the time-slot list and is the worst case. Both numbers are
+   for the *60-minute* event; re-check if the event type changes. */
 /* No overflow: hidden here. It was on the old wrapper div to clip widget.js's injected iframe
    to the rounded corner; .sched-frame is the iframe itself now, so border-radius clips it
    directly. Leaving it on risks suppressing the inner scrollbar, which is the one affordance
@@ -599,9 +600,9 @@ header {
   border: 0;
   border-radius: calc(var(--r-lg) - 8px);
 }
-/* The booking iframe restacks on narrow widths (~680px under Calendly; re-check for Cal.com).
-   The page itself collapses to one column at 1240px, after which the scheduler runs full width —
-   iframe width is viewport - 80, so that threshold lands at a ~760px viewport. */
+/* Calendly restacks below ~680px of iframe width. The page itself collapses to one column at
+   1240px, after which the scheduler runs full width — iframe width is viewport - 80, so that
+   threshold lands at a ~760px viewport. */
 @media (max-width: 760px) { .sched-frame { height: 780px; } }
 .sched-note { padding: 16px 32px 24px; margin: 0; font-size: 12.5px; line-height: 1.7; color: var(--muted); }
 .sched-note a { font-weight: 700; color: var(--body); text-decoration: underline; }
@@ -1073,32 +1074,37 @@ footer .legal { margin-top: 36px; padding-top: 24px; border-top: 1px solid var(-
         <div class="panel sched-panel reveal">
           <div class="panel-head">
             <h3>Pick a time</h3>
-            <p>Time with Chase, as long or short as you need. Nothing is sold on this call —
-            it is a conversation about where you are and what questions you are facing.</p>
+            <p>An hour with Chase. Nothing is sold on this call — it is a conversation about
+            where you are and what questions you are facing.</p>
           </div>
           <div class="sched-frame-pad">
-            <!-- Cal.com's plain iframe embed — no embed.js, so the page stays self-contained.
+            <!-- Calendly's plain iframe embed — no widget.js, so the page stays self-contained.
                  The height is fixed in CSS and has to be maintained by hand: a cross-origin
-                 iframe cannot size itself, and a plain (non-embed.js) iframe has nothing
-                 listening for a resize message. See the height comment on `.sched-frame`.
-                 The slug is `virtual` — the real, live "Video Meeting" event type. It offers
-                 15/30/60/90-minute options, so the booking page opens on a duration picker by
-                 design; the panel copy no longer promises a fixed length. Renaming it here 404s
-                 unless it is renamed in Cal.com first.
-                 `?theme=light` forces the light booking page so it can't follow a visitor's OS
-                 dark mode and clash with this white panel. Brand/primary color is NOT set in the
-                 URL — Cal.com has no plain-iframe equivalent of Calendly's color params; it is
-                 configured account-side in Cal.com > Appearance. If the calendar shows Cal.com's
-                 default blue instead of this page's black, fix it there, not here. -->
+                 iframe cannot size itself, and Calendly's booking page does not post the
+                 `calendly.page_height` message this account would need for auto-sizing.
+                 The slug is still `30min` — that is the real, live event type, even though it
+                 is configured for 60 minutes. Renaming it here 404s unless it is renamed in
+                 Calendly first.
+                 Keep the query string. The three color params map Calendly onto this page's
+                 black-and-white palette (verified: grey text, black month chevrons, not
+                 Calendly's default blue).
+                 `hide_event_type_details=1` is deliberately NOT set. It would drop Calendly's
+                 header block and about 200px with it, but that block is where the firm's logo
+                 renders, and per Chase the logo on the scheduler is worth more than the height.
+                 The trade was made knowingly: the frame is shorter than its content and the
+                 booking page scrolls inside it. Do not "fix" that by re-adding the param.
+                 Do NOT add a `month=` param either — it pins the calendar to a fixed month
+                 instead of opening on the current one. Calendly appends its own once the frame
+                 is live; that is fine, it is the initial src that matters. -->
             <iframe class="sched-frame"
-                    title="Select a date and time — Cal.com"
+                    title="Select a date and time — Calendly"
                     loading="lazy"
-                    src="https://cal.com/chase-dalton-chasewm/virtual?theme=light"></iframe>
+                    src="https://calendly.com/cdalton-chasewm/30min?hide_gdpr_banner=1&amp;background_color=ffffff&amp;text_color=3a3a3a&amp;primary_color=111111"></iframe>
           </div>
           <p class="sched-note">Calendar not loading? Some ad blockers stop it. Book at
-          <a href="https://cal.com/chase-dalton-chasewm/virtual" rel="noopener">cal.com</a>
-          or call <a href="tel:+18165884681">(816) 588-4681</a>. Scheduling is handled by Cal.com —
-          the name, email, and any notes you enter there go to Cal.com, not through this site.</p>
+          <a href="https://calendly.com/cdalton-chasewm/30min" rel="noopener">calendly.com</a>
+          or call <a href="tel:+18165884681">(816) 588-4681</a>. Scheduling is handled by Calendly —
+          the name, email, and any notes you enter there go to Calendly, not through this site.</p>
         </div>
 
         <div class="panel form-panel reveal" id="contact">

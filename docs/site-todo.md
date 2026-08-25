@@ -129,7 +129,7 @@ The concept files (`art-deco`, `neo-geo`, `neumorphic`, `modernist`, `neo-modern
 | Footer links | 🟠 About/Services/How it works/Contact/Form ADV present; Form ADV points at generic `adviserinfo.sec.gov` pending a CRD, and Privacy/Terms don't exist |
 | JSON-LD | ✅ `FinancialService` + `Person` on `index.html`; `ProfilePage`/`Person` on `about.html`. `hasOfferCatalog` lists the six real services. Not yet validated with Google's Rich Results Test. |
 | NAP | ✅ identical in the contact card, both footers, and both schema blocks |
-| Scheduling | 🟠 Cal.com iframe live in `#schedule` on `index.html`, beside the form, pointed at the firm's real event type (`chase-dalton-chasewm/virtual`) — embed height not yet re-verified against Cal.com's page, see below |
+| Scheduling | 🟠 Calendly iframe live in `#schedule` on `index.html`, beside the form, pointed at the firm's real event type (`cdalton-chasewm/30min`) — embed height and banner params still unverified against it, see below |
 | Contact form | ❌ renders and validates, but submits nowhere — see below |
 
 ### Blocking: the production domain points at the former firm
@@ -160,68 +160,77 @@ FAQ + `FAQPage` schema is now the highest-value remaining item.
 ## Scheduling and the contact form
 
 The old contact card is gone. `index.html` now ends with a single `#schedule` section that puts
-the two paths **side by side**: a white scheduler panel carrying the Cal.com iframe on the left,
+the two paths **side by side**: a white scheduler panel carrying the Calendly iframe on the left,
 and a dark form rail on the right holding the contact form, the availability line, and the NAP.
 Every "Book a free call" CTA on both pages points at it. The form rail also carries `id="contact"`
 so the older `#contact` anchors still land.
 
 The section uses `.wrap-wide` (1320px) rather than the site's standard 1120px `.wrap` — the
-scheduler column has to stay above the booking iframe's ~680px stacking threshold (that number was
-Calendly's; re-check Cal.com's) while the form rail keeps a usable 400px. Below a 1240px viewport
-the two columns stack; that is the only place they do.
+scheduler column has to stay above Calendly's ~680px stacking threshold while the form rail keeps
+a usable 400px. Below a 1240px viewport the two columns stack; that is the only place they do.
 
-**As of 2026-08-21 the scheduler is Cal.com** (`chase-dalton-chasewm/virtual`), swapped from
-Calendly at the client's request. It is a plain `<iframe>` — no embed.js — so the page stays
-self-contained. Do not reach for Cal.com's embed.js to auto-size it: the same move was tried with
-Calendly's `widget.js` on 2026-08-11 to get `data-resize`, and reverted the same day because the
-booking page never posted the resize message the widget needs, so the frame clipped exactly as a
-fixed height would. The dependency bought nothing then and Cal.com's plain iframe has the same
-no-self-sizing limitation now.
+**As of 2026-08-11 this is a plain `<iframe>` again.** It was moved to Calendly's `widget.js`
+JS embed earlier the same day to get `data-resize` auto-sizing, then moved straight back: the
+resize never fired. On the live site the booking page sent no `calendly.page_height` message in
+an 8-second window — `embed_domain` and `embed_type` were both correct on the injected `src`, so
+the embed was wired right and Calendly simply wasn't answering. Without that message `widget.js`
+never sets a height, the div stays at its CSS value, and the calendar clips exactly as a fixed
+height would. The dependency was buying nothing, so the self-contained-single-file convention
+holds again and no file loads external JS.
 
-So `.sched-frame`'s height stays hand-maintained: `700px`, with a `max-width: 760px` query taking
-it to `780px` for the stacked layout. **These two numbers were tuned for Calendly's 60-minute page
-and are carried over unverified — re-measure against Cal.com's live embed.** Cal.com's layout is a
-different height, and `/virtual` opens on a **duration picker** (15/30/60/90m) before the calendar,
-which Calendly's single-duration page did not have. Judge the height with a date *and* a duration
-selected — that expands both the picker and the time-slot list, the worst case.
+The cost is that `.sched-frame`'s height is hand-maintained: `700px`, with a `max-width: 760px`
+query taking it to `780px` for Calendly's stacked layout. Both are for the **60-minute** event.
 
-The firm's logo sits on the scheduler as `.sched-logo` in the panel head, from
-`assets/Light-Email-Logo.png` — independent of the booking provider, so it survived the swap. Its
-`alt` is empty by design; the app bar and footer already announce the firm name.
+The embed also runs `hide_event_type_details=1`, which drops Calendly's header block — their
+logo, "Chase Dalton", "60 Minute Meeting", the duration and the office address. All of it was
+already on the page in the panel head and the form rail, so it read as duplication, and it was
+worth roughly 200px of frame height. What remains measures ~575px on first paint.
 
-Cal.com has no plain-iframe equivalent of Calendly's `background_color`/`text_color`/`primary_color`
-params. `?theme=light` is set to force the light booking page (so it can't follow a visitor's OS
-dark mode against the white panel), but the brand/primary color is configured account-side in
-**Cal.com > Appearance**, not the URL. If the calendar renders in Cal.com's default blue instead of
-this page's black, that is where to fix it. Hiding the "Cal.com" branding ribbon is a paid-plan
-feature, same as Calendly's was — not reachable from the embed URL.
+The firm's logo is wanted on the scheduler, so it is back — but as `.sched-logo` in the panel
+head, from `assets/Light-Email-Logo.png`, rather than by un-hiding Calendly's header. That keeps
+the height, puts the mark in this page's palette and spacing, and costs ~40px instead of ~200px.
+Its `alt` is empty by design; the app bar and footer already announce the firm name. The heights
+above are set for the **date-selected** state instead, where the time-slot list appears below
+the calendar — that is the state that overflows, and `700px` is Calendly's documented floor for
+it. Click a date before judging whether a height is right.
 
-- [x] **Swap Calendly for Cal.com.** Done — both occurrences in `index.html` (the iframe `src` and
-  the link in `.sched-note`) now point at `cal.com/chase-dalton-chasewm/virtual`, and the privacy
-  disclosure line under the embed names Cal.com. The `src` carries `?theme=light`; no other params.
-- [ ] **Set the brand color in Cal.com > Appearance.** So the calendar matches the page's black
-  palette instead of Cal.com's default blue. This is account-side, not a code change — flag it to
-  Chase.
-- [ ] **Re-measure the two fixed heights against Cal.com, with a date and duration selected.**
-  `700px` desktop / `780px` below 760px, carried over from Calendly and not yet verified. The
-  `/virtual` duration picker adds height Calendly's page did not have. Too short clips the time-slot
-  list, too tall leaves dead white space above `.sched-note`.
-- [ ] **The `.sched-note` fallback still matters.** An ad blocker that blocks cal.com leaves a
-  broken iframe rather than an empty div, but either way the "Calendar not loading?" line and its
-  direct cal.com link are the only remaining path to booking. Do not trim that copy.
+The three color params do work, contrary to an earlier note here: verified grey text and black
+month chevrons rather than Calendly's default blue. Branding beyond those params (the "POWERED
+BY Calendly" ribbon) is a plan-level feature and not reachable from the embed URL.
+
+- [x] **Swap the placeholder Calendly URL.** Done — both occurrences in `index.html` (the iframe
+  `src` and the link in `.sched-note`) now point at `cdalton-chasewm/30min`. The query string
+  (`hide_gdpr_banner=1` plus the three color params) is kept on the `src`. The client's link
+  arrived with a `month=2026-08` param, dropped deliberately: it pins the calendar to a fixed
+  month rather than opening on the current one.
+- [ ] **Confirm `hide_gdpr_banner=1` actually takes effect.** Calendly documents cookie-banner
+  hiding as a JS-embed capability, so on the plain iframe it may well do nothing. If the banner
+  shows inside the card, decide whether to live with it or to accept `widget.js` back for that
+  one reason.
+- [ ] **Eyeball the two fixed heights, with a date selected.** `700px` desktop / `780px` below
+  760px. The opening view fits easily; the time-slot list that appears after clicking a date is
+  what overflows. Too short clips it, too tall leaves dead white space above `.sched-note`.
+- [ ] **The event slug no longer matches its duration.** `cdalton-chasewm/30min` is configured
+  in Calendly as a **60 Minute Meeting**, and both pages' copy now says an hour. The slug is
+  left alone because renaming it in the markup 404s unless it is renamed in Calendly first.
+  Worth tidying on the Calendly side so the URL stops lying.
+- [ ] **The `.sched-note` fallback still matters.** An ad blocker that blocks calendly.com now
+  leaves a broken iframe rather than an empty div, but either way the "Calendar not loading?"
+  line and its direct calendly.com link are the only remaining path to booking. Do not trim
+  that copy.
 - [ ] **The contact form still submits nowhere.** `onsubmit` calls `preventDefault()` and
   fires an `alert()` claiming someone will reach out; the data is discarded. This was survivable
   when it was the page's only CTA and nobody was driving traffic. It is worse now — the
   scheduler beside it genuinely works, so the failing path is the one chosen by the visitor
   who is not ready to commit to a time slot. Needs a real handler (Formspree, Netlify Forms,
   or a `mailto:` fallback) or removal.
-- [ ] **Privacy Policy is now load-bearing, not just missing.** Cal.com is a third party that
+- [ ] **Privacy Policy is now load-bearing, not just missing.** Calendly is a third party that
   sets cookies and collects name, email, and free-text notes from visitors. The page carries a
   one-line disclosure under the embed saying so, which is not a substitute. Whatever handler
   the contact form gets is a second processor with the same problem.
 
 **Compliance:** the scheduler itself asserts nothing, so it is outside the SEC/FINRA
-advertising-rule gate. The section copy around it is not — "Time with Chase, as long or short as
-you need" and "Nothing is sold on this call" are marketing claims and need the same review as the
-rest of the page. Anything the `/virtual` event type's own description says on Cal.com is published
-marketing copy too, and it lives outside this repo where the review step cannot see it.
+advertising-rule gate. The section copy around it is not — "An hour with Chase" and
+"Nothing is sold on this call" are marketing claims and need the same review as the rest of the
+page. Anything the event type's own description says on Calendly is published marketing copy too,
+and it lives outside this repo where the review step cannot see it.
