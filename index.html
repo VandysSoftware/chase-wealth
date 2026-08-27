@@ -170,7 +170,7 @@
           "name": "How do we get started, and what does a first meeting cost?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "It starts with a conversation at no cost and no obligation — a chance to map where you are and see whether we are the right fit. Nothing is sold on it. From there we build your written plan and model portfolio and walk you through it line by line, then keep it current as your life, your business, or the law changes the inputs."
+            "text": "It starts with a conversation at no cost and no obligation — a chance to map where you are and see whether we are the right fit. Nothing is sold on it. From there we build your written plan and portfolio and walk you through it line by line, then keep it current as your life, your business, or the law changes the inputs."
           }
         }
       ]
@@ -771,6 +771,13 @@ header {
 @media (max-width: 480px) { .form-row { grid-template-columns: 1fr; } }
 .contact-form .btn { align-self: flex-start; margin-top: 4px; }
 .form-note { font-size: 12px; color: #9A9A9A; margin: 0; }
+/* Submission feedback. Monochrome by design — success vs. error is carried by wording, not hue. */
+.form-status {
+  font-size: 13.5px; font-weight: 700; color: #FFFFFF; margin: 2px 0 0;
+  padding: 12px 15px; border-radius: var(--r-sm);
+  background: rgba(255,255,255,0.10); border: 1px solid rgba(255,255,255,0.26);
+}
+.form-status.error { background: rgba(255,255,255,0.05); border-style: dashed; }
 .form-panel .avail { margin-top: auto; padding-top: 28px; }
 .avail { display: inline-flex; align-items: center; gap: 10px; font-size: 13.5px; font-weight: 700; color: #FFFFFF; }
 .avail::before { content: ""; width: 9px; height: 9px; border-radius: 50%; background: #FFFFFF; box-shadow: 0 0 0 4px rgba(255,255,255,0.25); }
@@ -840,17 +847,15 @@ footer .legal { margin-top: 36px; padding-top: 24px; border-top: 1px solid var(-
              leaving it here too would have made the two read as a stutter. Pill keeps the local
              signal only. -->
         <span class="label reveal">Kansas City, MO</span>
-        <!-- Keyword-bearing first line, Chase's approach phrase in the highlight. "Fee-only wealth
-             management" leads the H1 (strongest on-page heading signal); "purpose-driven,
-             process-built" is Chase's own approach line, per his message relayed 2026-08-13,
-             replacing the earlier "one disciplined plan".
-             "Fiduciary" is not in the H1 but isn't lost: it's in the meta description, the trust row
-             below, and the schema's FinancialService description. (It was in the <title> until
-             2026-08-11, when that came down from 81 to 57 characters to stop Google truncating it.)
-             Do not stack more adjectives ahead of "wealth management" — four deep reads as keyword
-             stuffing to both people and crawlers. -->
+        <!-- H1 leads with "Wealth management"; "purpose-driven, process-built" is Chase's own
+             approach line (relayed 2026-08-13). "Fee-only" was removed from the H1 per Chase
+             2026-08-27 — it isn't lost: it still lives in the trust row below, the fees section, and
+             the meta/OG descriptions. "Fiduciary" is likewise carried by the trust row, the meta
+             description, and the schema's FinancialService description rather than the H1.
+             Do not stack adjectives ahead of "wealth management" — it reads as keyword stuffing to
+             both people and crawlers. -->
         <h1 class="reveal">
-          <span class="line l1">Fee-only wealth management,</span>
+          <span class="line l1">Wealth management,</span>
           <span class="line l2 hl">purpose-driven,</span>
           <span class="line l3 hl">process-built</span>
         </h1>
@@ -859,17 +864,16 @@ footer .legal { margin-top: 36px; padding-top: 24px; border-top: 1px solid var(-
              measure rather than performance, which is why it asserts nothing the advertising rules
              can catch. -->
         <h2 class="hero-sub reveal">Success is you understanding it.</h2>
-        <!-- The "fee-only fiduciary practice in Kansas City" clause used to live here, because the
-             H1 carried no keywords and docs/seo-sections.md rates this lede a keyword signal. Now
-             that the H1 carries "fee-only wealth management" and the pill carries the city,
-             repeating it here read as a stutter three deep. The keyword is not lost — it moved up,
-             which is where that doc wanted it.
-             The list must stay a 1:1 map of the six service cards below — it read as five and
-             silently dropped financial planning. If a service is added or renamed down there,
-             this line and the "six different offices" count change with it. -->
+        <!-- The list is a 1:1 map of the six service cards below (investments, financial planning,
+             tax, legacy/estate, liability/risk, business) — it once read as five and silently
+             dropped financial planning, so keep all six if a card is renamed.
+             Reframed per Chase 2026-08-27 from "six different offices... one written plan, one
+             advisor, one annual advisory fee" to a silos-to-strategy line: the point is that these
+             are coordinated, NOT that the firm executes them. This deliberately avoids implying the
+             firm files tax returns or drafts estate documents (it does neither — see the tax and
+             estate service cards). -->
         <p class="lede reveal">Investments, financial planning, taxes, estate, insurance, the
-        business — usually six different offices and six different opinions. Here it's one written
-        plan, one advisor, one annual advisory fee.</p>
+        business — none of it should live in a separate silo.</p>
         <div class="cta-row reveal">
           <a class="btn filled" href="#schedule">Book a free call <span class="arrow">→</span></a>
           <a class="btn tonal" href="#services">Explore services</a>
@@ -1085,7 +1089,7 @@ footer .legal { margin-top: 36px; padding-top: 24px; border-top: 1px solid var(-
           <!-- "Build", not "draft". The estate card now assigns drafting to the client's attorney,
                so using the same verb for what Chase does undoes that distinction two sections
                later. The plan is written; the legal documents are not his. -->
-          <p>We build your written plan and model portfolio, then walk you through it line by line
+          <p>We build your written plan and portfolio, then walk you through it line by line
           until every part of it makes sense to you.</p>
         </div>
         <div class="stp reveal">
@@ -1311,7 +1315,7 @@ footer .legal { margin-top: 36px; padding-top: 24px; border-top: 1px solid var(-
           <div class="faq-a">
             <p>It starts with a conversation at no cost and no obligation — a chance to map where you
             are and see whether we are the right fit. Nothing is sold on it. From there we build your
-            written plan and model portfolio and walk you through it line by line, then keep it current
+            written plan and portfolio and walk you through it line by line, then keep it current
             as your life, your business, or the law changes the inputs. <a href="#schedule">Book a free
             call</a> whenever you are ready.</p>
           </div>
@@ -1373,7 +1377,16 @@ footer .legal { margin-top: 36px; padding-top: 24px; border-top: 1px solid var(-
           <span class="label">Or send a note</span>
           <h3>Not ready to pick a time?</h3>
           <p>Tell us a little and we will reply within one business day.</p>
-          <form class="contact-form" onsubmit="event.preventDefault(); alert('Thanks — we\'ll reach out within one business day.');">
+          <!-- Web3Forms wiring. access_key is a PUBLIC key — safe in client-side code (Web3Forms
+               states this on the setup page), so it is fine to commit. The submit is enhanced by
+               fetch (script at page bottom) to post without leaving the page and show inline status;
+               action/method are the no-JS fallback. The visible fields are otherwise unchanged. -->
+          <form id="contact-form" class="contact-form" action="https://api.web3forms.com/submit" method="POST">
+            <input type="hidden" name="access_key" value="c4dfe6f4-20b7-49ec-ab6d-c31ddb1d5bac">
+            <input type="hidden" name="subject" value="New inquiry from the Chase Wealth Management website">
+            <input type="hidden" name="from_name" value="Chase Wealth Management website">
+            <!-- Honeypot: a real person leaves this empty; a bot fills it and Web3Forms drops the submit. -->
+            <input type="checkbox" name="botcheck" tabindex="-1" autocomplete="off" aria-hidden="true" style="display:none">
             <div class="form-row">
               <div class="field">
                 <label for="name">Name</label>
@@ -1401,6 +1414,7 @@ footer .legal { margin-top: 36px; padding-top: 24px; border-top: 1px solid var(-
             <button class="btn inverse" type="submit">Send my note <span class="arrow">→</span></button>
             <p class="form-note">Please don't include account numbers or other sensitive information
             in this form.</p>
+            <p class="form-status" id="form-status" role="status" aria-live="polite" hidden></p>
           </form>
           <span class="avail">Currently accepting new clients</span>
           <address class="nap">
@@ -1471,6 +1485,42 @@ document.querySelectorAll('.btn').forEach(btn => {
     setTimeout(() => s.remove(), 600);
   });
 });
+
+// Contact form → Web3Forms. Posts via fetch so the visitor stays on the page and gets inline
+// feedback. If JS is off, the form's action/method POST to Web3Forms directly (their success page).
+const contactForm = document.getElementById('contact-form');
+if (contactForm) {
+  const status = document.getElementById('form-status');
+  const submitBtn = contactForm.querySelector('button[type="submit"]');
+  const setStatus = (msg, isError) => {
+    status.textContent = msg;
+    status.classList.toggle('error', !!isError);
+    status.hidden = false;
+  };
+  contactForm.addEventListener('submit', async (ev) => {
+    ev.preventDefault();
+    submitBtn.disabled = true;
+    setStatus('Sending…', false);
+    try {
+      const res = await fetch(contactForm.action, {
+        method: 'POST',
+        headers: { 'Accept': 'application/json' },
+        body: new FormData(contactForm)
+      });
+      const data = await res.json().catch(() => ({}));
+      if (res.ok && data.success) {
+        contactForm.reset();
+        setStatus('Thanks — we’ll reach out within one business day.', false);
+      } else {
+        setStatus('Something went wrong sending your note. Please email or call us instead.', true);
+        submitBtn.disabled = false;
+      }
+    } catch (err) {
+      setStatus('Couldn’t reach the server. Please check your connection, or call us instead.', true);
+      submitBtn.disabled = false;
+    }
+  });
+}
 </script>
 
 </body>
