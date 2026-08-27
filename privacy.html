@@ -1,0 +1,473 @@
+<!DOCTYPE html>
+<!--
+  Chase Wealth Management — WEBSITE PRIVACY POLICY
+
+  DRAFT — needs review and fill-ins before it is linked or launched:
+    1. Replace every [BRACKETED] placeholder (effective date, privacy contact).
+    2. Confirm the contact-form path: this draft describes the form as collecting
+       name/email/message via a form provider. If the form stays a no-op (it is a
+       client-side stub today) OR a provider other than Web3Forms is chosen, edit
+       the "Information you give us" and "service providers" sections to match.
+    3. Route through the firm's advertising/compliance review.
+    4. THEN wire a "Privacy Policy" link into the index.html and about.html footers
+       and add /privacy.html to sitemap.xml. It is intentionally unlinked until then.
+
+  This is the WEBSITE privacy policy only. It does NOT replace the firm's
+  Regulation S-P / GLBA privacy notice delivered to advisory clients — that is a
+  separate compliance document. A pointer to it is in the last section.
+
+  Same Material design system as index.html / about.html (tokens, app bar, footer,
+  motion). Manrope only; no Fraunces on this page.
+-->
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Privacy Policy | Chase Wealth Management</title>
+<meta name="description" content="How the Chase Wealth Management website collects, uses, and protects information from visitors. Separate from the firm's client privacy notice.">
+<link rel="canonical" href="https://vandyssoftware.github.io/chase-wealth/privacy.html">
+
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Chase Wealth Management">
+<meta property="og:title" content="Privacy Policy | Chase Wealth Management">
+<meta property="og:description" content="How the Chase Wealth Management website collects, uses, and protects visitor information.">
+<meta property="og:url" content="https://vandyssoftware.github.io/chase-wealth/privacy.html">
+<meta property="og:image" content="https://vandyssoftware.github.io/chase-wealth/assets/og-card.png">
+<meta property="og:image:type" content="image/png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Chase Wealth Management">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Privacy Policy | Chase Wealth Management">
+<meta name="twitter:description" content="How the Chase Wealth Management website collects, uses, and protects visitor information.">
+<meta name="twitter:image" content="https://vandyssoftware.github.io/chase-wealth/assets/og-card.png">
+<meta name="twitter:image:alt" content="Chase Wealth Management">
+
+<link rel="icon" type="image/png" sizes="32x32" href="assets/favicon-32.png">
+<link rel="icon" type="image/png" sizes="512x512" href="assets/favicon.png">
+<link rel="apple-touch-icon" href="assets/favicon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+<style>
+:root {
+  /* Palette: strictly black & white — all emphasis from tonal value, not hue.
+     Material's tonal-surface system is preserved, mapped onto a grey ramp. */
+  --ground: #FAFAFA;
+  --surface: #FFFFFF;
+  --surface-tonal: #EDEDED;
+  --surface-tonal-2: #E0E0E0;
+  --ink: #000000;
+  --body: #3A3A3A;
+  --muted: #6E6E6E;
+  --primary: #111111;
+  --primary-hover: #000000;
+  --on-primary: #FFFFFF;
+  --outline: #E2E2E2;
+  --sans: 'Manrope', 'Segoe UI', 'Helvetica Neue', Arial, sans-serif;
+  --e1: 0 1px 2px rgba(0, 0, 0, 0.06), 0 1px 3px rgba(0, 0, 0, 0.08);
+  --e2: 0 2px 6px rgba(0, 0, 0, 0.08), 0 6px 16px rgba(0, 0, 0, 0.08);
+  --e3: 0 8px 24px rgba(0, 0, 0, 0.12), 0 2px 6px rgba(0, 0, 0, 0.06);
+  --r-sm: 12px;
+  --r-md: 18px;
+  --r-lg: 28px;
+  --r-pill: 999px;
+}
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body {
+  margin: 0;
+  background: var(--ground);
+  color: var(--body);
+  font-family: var(--sans);
+  font-size: 16.5px;
+  line-height: 1.65;
+  -webkit-font-smoothing: antialiased;
+}
+h1, h2, h3 { color: var(--ink); margin: 0; line-height: 1.15; letter-spacing: -0.02em; font-weight: 700; }
+a { color: inherit; text-decoration: none; }
+.wrap { max-width: 1120px; margin: 0 auto; padding: 0 32px; }
+.label {
+  display: inline-block;
+  font-size: 12px; font-weight: 800;
+  letter-spacing: 0.14em; text-transform: uppercase;
+  color: var(--primary);
+  background: var(--surface-tonal);
+  border-radius: var(--r-pill);
+  padding: 7px 16px;
+}
+
+/* ---------- App bar ---------- */
+header {
+  position: sticky; top: 0; z-index: 50;
+  background: color-mix(in srgb, var(--ground) 88%, transparent);
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid var(--outline);
+}
+.nav { display: flex; align-items: center; justify-content: space-between; padding: 14px 0; }
+.logo-img { height: 72px; width: auto; display: block; margin: -14px 0; }
+.nav-links { display: flex; gap: 6px; }
+.nav-links a {
+  font-size: 14.5px; font-weight: 600; color: var(--body);
+  padding: 9px 16px; border-radius: var(--r-pill);
+  transition: background 0.2s ease, color 0.2s ease;
+}
+.nav-links a:hover { background: var(--surface-tonal); color: var(--primary); }
+.nav-links a[aria-current="page"] { background: var(--surface-tonal); color: var(--primary); font-weight: 700; }
+@media (max-width: 900px) { .nav-links { display: none; } }
+
+/* ---------- Buttons ---------- */
+.btn {
+  display: inline-flex; align-items: center; gap: 10px;
+  font-family: var(--sans); font-size: 15px; font-weight: 700;
+  border-radius: var(--r-pill);
+  padding: 14px 28px;
+  border: none; cursor: pointer;
+  transition: box-shadow 0.25s cubic-bezier(.2,.7,.3,1), background 0.2s ease, transform 0.25s cubic-bezier(.2,.7,.3,1);
+  position: relative; overflow: hidden;
+}
+.btn.filled { background: var(--primary); color: var(--on-primary); box-shadow: var(--e1); }
+.btn.filled:hover { background: var(--primary-hover); box-shadow: var(--e2); transform: translateY(-1px); }
+.btn.tonal { background: var(--surface-tonal); color: var(--primary); }
+.btn.tonal:hover { background: var(--surface-tonal-2); }
+.btn .arrow { transition: transform 0.25s ease; }
+.btn:hover .arrow { transform: translateX(3px); }
+.ripple {
+  position: absolute; border-radius: 50%;
+  background: rgba(255,255,255,0.35);
+  transform: scale(0); animation: ripple 0.55s ease-out forwards;
+  pointer-events: none;
+}
+.btn.tonal .ripple { background: rgba(0,0,0,0.16); }
+@keyframes ripple { to { transform: scale(3.4); opacity: 0; } }
+
+/* ---------- Legal document ---------- */
+.doc { padding: 60px 0 24px; }
+.doc-inner { max-width: 760px; margin: 0 auto; }
+.doc-head { margin-bottom: 40px; }
+.doc-head h1 { font-size: clamp(34px, 5vw, 50px); font-weight: 800; margin: 18px 0 12px; }
+.doc-head .updated { font-size: 13.5px; font-weight: 700; letter-spacing: 0.04em; color: var(--muted); }
+.doc-lede { font-size: 18px; color: var(--body); margin: 22px 0 0; }
+
+.doc-jump {
+  background: var(--surface);
+  border-radius: var(--r-md);
+  box-shadow: var(--e1);
+  padding: 22px 26px;
+  margin: 0 0 12px;
+}
+.doc-jump h2 { font-size: 12px; font-weight: 800; letter-spacing: 0.14em; text-transform: uppercase; color: var(--muted); margin: 0 0 14px; }
+.doc-jump ol { margin: 0; padding: 0; list-style: none; columns: 2; column-gap: 32px; }
+@media (max-width: 560px) { .doc-jump ol { columns: 1; } }
+.doc-jump li { margin: 0 0 9px; break-inside: avoid; }
+.doc-jump a { font-size: 14.5px; font-weight: 600; color: var(--body); }
+.doc-jump a:hover { color: var(--primary); text-decoration: underline; }
+
+.doc section { padding: 34px 0; border-top: 1px solid var(--outline); scroll-margin-top: 96px; }
+.doc section:first-of-type { border-top: none; }
+.doc section h2 { font-size: clamp(21px, 2.6vw, 26px); margin: 0 0 16px; }
+.doc section h3 { font-size: 16px; font-weight: 800; letter-spacing: 0.01em; color: var(--ink); margin: 24px 0 8px; }
+.doc p { margin: 0 0 16px; max-width: 66ch; }
+.doc p:last-child { margin-bottom: 0; }
+.doc ul { margin: 0 0 16px; padding-left: 22px; max-width: 66ch; }
+.doc li { margin: 0 0 9px; }
+.doc a.inline { color: var(--primary); font-weight: 600; text-decoration: underline; text-underline-offset: 3px; }
+.doc strong { color: var(--ink); font-weight: 700; }
+
+.callout {
+  background: var(--surface-tonal);
+  border-radius: var(--r-md);
+  padding: 20px 24px;
+  margin: 0 0 16px;
+  font-size: 15px;
+  color: var(--body);
+}
+.contact-block {
+  background: var(--surface);
+  border-radius: var(--r-md);
+  box-shadow: var(--e1);
+  padding: 24px 26px;
+  font-style: normal;
+  line-height: 1.75;
+}
+.contact-block a { font-weight: 700; color: var(--ink); }
+.contact-block a:hover { text-decoration: underline; }
+
+/* ---------- Footer ---------- */
+footer { border-top: 1px solid var(--outline); padding: 56px 0 40px; font-size: 14px; color: var(--muted); }
+.foot-grid { display: flex; justify-content: space-between; align-items: flex-start; gap: 40px; flex-wrap: wrap; }
+footer .logo-img { height: 72px; margin: -14px 0 -10px; }
+footer .tagline { margin: 0 0 18px; font-weight: 600; }
+footer address { font-style: normal; line-height: 1.75; }
+footer address a { font-weight: 700; color: var(--ink); }
+footer address a:hover { text-decoration: underline; }
+.foot-links { display: flex; flex-direction: column; gap: 10px; font-weight: 700; }
+.foot-links a:hover { color: var(--primary); text-decoration: underline; }
+footer .legal { margin-top: 36px; padding-top: 24px; border-top: 1px solid var(--outline); font-size: 12.5px; line-height: 1.8; }
+
+/* Reveal */
+.reveal { opacity: 0; transform: translateY(20px); transition: opacity 0.7s cubic-bezier(.2,.7,.3,1), transform 0.7s cubic-bezier(.2,.7,.3,1); }
+.reveal.in { opacity: 1; transform: none; }
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after { animation-duration: 0.001ms !important; animation-iteration-count: 1 !important; transition-duration: 0.001ms !important; }
+  .reveal { opacity: 1; transform: none; }
+}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap nav">
+    <a href="index.html" aria-label="Chase Wealth Management home">
+      <img class="logo-img" src="assets/Light-Email-Logo.png" width="400" height="200" alt="Chase Wealth Management">
+    </a>
+    <nav class="nav-links" aria-label="Primary">
+      <a href="about.html">About</a>
+      <a href="index.html#services">Services</a>
+      <a href="index.html#process">How it works</a>
+      <a href="index.html#fees">Fees</a>
+      <a href="index.html#contact">Contact</a>
+    </nav>
+    <a class="btn filled" href="index.html#schedule">Book a free call</a>
+  </div>
+</header>
+
+<main>
+  <div class="doc">
+    <div class="wrap">
+      <div class="doc-inner">
+
+        <div class="doc-head reveal">
+          <span class="label">Website Privacy</span>
+          <h1>Privacy Policy</h1>
+          <p class="updated">Last updated: [EFFECTIVE DATE]</p>
+          <p class="doc-lede">This policy explains what information the Chase Wealth Management
+          website collects, how it is used, and the choices you have. It applies to this website only.</p>
+        </div>
+
+        <nav class="doc-jump reveal" aria-label="On this page">
+          <h2>On this page</h2>
+          <ol>
+            <li><a href="#scope">1. Scope of this policy</a></li>
+            <li><a href="#collect">2. Information we collect</a></li>
+            <li><a href="#use">3. How we use information</a></li>
+            <li><a href="#share">4. How information is shared</a></li>
+            <li><a href="#retention">5. Data retention</a></li>
+            <li><a href="#security">6. Security</a></li>
+            <li><a href="#choices">7. Your choices and rights</a></li>
+            <li><a href="#children">8. Children's privacy</a></li>
+            <li><a href="#links">9. Links to other sites</a></li>
+            <li><a href="#changes">10. Changes to this policy</a></li>
+            <li><a href="#contact">11. Contact us</a></li>
+            <li><a href="#client-notice">12. Advisory-client privacy</a></li>
+          </ol>
+        </nav>
+
+        <section id="scope" class="reveal">
+          <h2>1. Scope of this policy</h2>
+          <p>This Privacy Policy covers information collected through the Chase Wealth Management
+          website at <strong>chasewealthmanagement.com</strong>. It does not cover information you
+          provide to us offline, by phone, or in the course of an advisory relationship.</p>
+          <p>Chase Wealth Management is a state-registered investment adviser. If you become a client,
+          the firm also provides a separate privacy notice describing how it handles your nonpublic
+          personal information under applicable financial-privacy law. That notice — not this page —
+          governs client information; see <a class="inline" href="#client-notice">section 12</a>.</p>
+        </section>
+
+        <section id="collect" class="reveal">
+          <h2>2. Information we collect</h2>
+          <h3>Information you give us</h3>
+          <p>If you use the contact form on our site, we collect the information you enter — your
+          <strong>name</strong>, <strong>email address</strong>, and the <strong>message</strong> and
+          topic you provide — so we can respond to your inquiry.</p>
+          <p>If you schedule a meeting, the scheduling is handled by our third-party scheduling tool
+          (Calendly). The name, email, and any notes you enter there are provided directly to that
+          tool, not stored by this website. See <a class="inline" href="#share">section 4</a>.</p>
+          <div class="callout">Please do not include account numbers, Social Security numbers, or
+          other sensitive personal information in the contact form or scheduling notes.</div>
+          <h3>Information collected automatically</h3>
+          <p>Our website is served by a third-party hosting provider (GitHub Pages). Like most web
+          servers, it may automatically log basic technical information when you visit — such as your
+          IP address, browser type, the pages you request, and the date and time of your visit — for
+          security and reliability.</p>
+          <p>Our pages load fonts from Google Fonts. When a page loads, your browser requests those
+          font files from Google's servers, which involves sharing your IP address with Google for
+          that purpose.</p>
+          <h3>Cookies and tracking</h3>
+          <p>This website does <strong>not</strong> set advertising or analytics cookies, and it uses
+          no analytics, advertising, or cross-site tracking technologies. If you open the embedded
+          scheduling tool, that third-party tool may set its own cookies within its frame, governed by
+          its own privacy policy.</p>
+        </section>
+
+        <section id="use" class="reveal">
+          <h2>3. How we use information</h2>
+          <p>We use the information described above to:</p>
+          <ul>
+            <li>respond to your inquiries and communicate with you;</li>
+            <li>schedule and hold meetings you request;</li>
+            <li>operate, maintain, secure, and improve the website;</li>
+            <li>comply with our legal, regulatory, and recordkeeping obligations.</li>
+          </ul>
+          <p>We do not use website information to make automated decisions about you, and we do not
+          sell it.</p>
+        </section>
+
+        <section id="share" class="reveal">
+          <h2>4. How information is shared</h2>
+          <p>We do <strong>not</strong> sell or rent your personal information. We share it only in
+          these limited circumstances:</p>
+          <ul>
+            <li><strong>Service providers that operate this site and its tools</strong>, and only as
+            needed to provide their service:
+              <ul>
+                <li><strong>Calendly</strong> — meeting scheduling
+                (<a class="inline" href="https://calendly.com/privacy" rel="noopener">privacy policy</a>);</li>
+                <li><strong>Google</strong> — delivery of Google Fonts
+                (<a class="inline" href="https://policies.google.com/privacy" rel="noopener">privacy policy</a>);</li>
+                <li><strong>GitHub</strong> — website hosting via GitHub Pages
+                (<a class="inline" href="https://docs.github.com/site-policy/privacy-policies/github-general-privacy-statement" rel="noopener">privacy statement</a>);</li>
+                <li><strong>[Web3Forms or the chosen contact-form provider]</strong> — delivery of
+                contact-form submissions, if the form is enabled.</li>
+              </ul>
+            </li>
+            <li><strong>Legal and safety</strong> — when required by law, regulation, subpoena, or
+            legal process, or to protect the rights, property, or safety of the firm, our clients, or
+            others.</li>
+          </ul>
+        </section>
+
+        <section id="retention" class="reveal">
+          <h2>5. Data retention</h2>
+          <p>We keep inquiry and scheduling information for as long as needed to respond to you and to
+          meet the firm's legal and regulatory recordkeeping obligations, after which it is deleted or
+          anonymized. Information held by our service providers is retained according to their own
+          policies.</p>
+        </section>
+
+        <section id="security" class="reveal">
+          <h2>6. Security</h2>
+          <p>We take reasonable measures to protect the information handled through this site. However,
+          no method of transmission over the internet or electronic storage is completely secure, and
+          we cannot guarantee absolute security. As noted above, please do not send sensitive personal
+          or account information through the website.</p>
+        </section>
+
+        <section id="choices" class="reveal">
+          <h2>7. Your choices and rights</h2>
+          <p>You can choose not to provide information through the site, though some features (such as
+          the contact form or scheduling) may not work without it. You may contact us to ask what
+          personal information we hold about you, to correct it, or to request its deletion, and to ask
+          us not to contact you further.</p>
+          <p>Depending on the state you live in, you may have additional rights regarding your personal
+          information. To exercise any of these, contact us using
+          <a class="inline" href="#contact">section 11</a>.</p>
+        </section>
+
+        <section id="children" class="reveal">
+          <h2>8. Children's privacy</h2>
+          <p>This website is intended for adults and is not directed to children under 13. We do not
+          knowingly collect personal information from children. If you believe a child has provided us
+          information, please contact us and we will delete it.</p>
+        </section>
+
+        <section id="links" class="reveal">
+          <h2>9. Links to other sites</h2>
+          <p>Our site links to third-party websites — for example, the adviser's regulatory record on
+          the SEC's Investment Adviser Public Disclosure site, and the scheduling tool. We are not
+          responsible for the privacy practices or content of those sites, and this policy does not
+          apply to them.</p>
+        </section>
+
+        <section id="changes" class="reveal">
+          <h2>10. Changes to this policy</h2>
+          <p>We may update this Privacy Policy from time to time. When we do, we will revise the
+          "Last updated" date at the top of this page. Material changes will be reflected here.</p>
+        </section>
+
+        <section id="contact" class="reveal">
+          <h2>11. Contact us</h2>
+          <p>Questions about this policy or about your information? Contact us:</p>
+          <address class="contact-block">
+            Chase Wealth Management<br>
+            1201 NW Briarcliff Pkwy, Suite 201<br>
+            Kansas City, MO 64116<br>
+            Phone: <a href="tel:+18165884681">(816) 588-4681</a><br>
+            Email: <a href="mailto:[privacy contact email]">[privacy contact email]</a>
+          </address>
+        </section>
+
+        <section id="client-notice" class="reveal">
+          <h2>12. Advisory-client privacy</h2>
+          <p>If you are or become an advisory client, the firm separately provides a privacy notice
+          describing how it collects, uses, and protects your nonpublic personal information, as
+          required by applicable financial-privacy law. That client notice is a separate document and
+          is not replaced by this website policy. To request a copy, contact us using the details
+          above.</p>
+        </section>
+
+      </div>
+    </div>
+  </div>
+</main>
+
+<footer>
+  <div class="wrap">
+    <div class="foot-grid">
+      <div>
+        <img class="logo-img" src="assets/Light-Email-Logo.png" width="400" height="200" alt="Chase Wealth Management">
+        <p class="tagline">Advice on your side of the table.</p>
+        <address>
+          1201 NW Briarcliff Pkwy, Suite 201<br>
+          Kansas City, MO 64116<br>
+          <a href="tel:+18165884681">(816) 588-4681</a>
+        </address>
+      </div>
+      <nav class="foot-links" aria-label="Footer">
+        <a href="about.html">About Chase</a>
+        <a href="index.html#services">Services</a>
+        <a href="index.html#process">How it works</a>
+        <a href="index.html#fees">Fees</a>
+        <a href="index.html#contact">Contact</a>
+        <!-- Chase Dalton's IAPD record, IAR CRD #7493251. Keep this in sync with index.html. -->
+        <a href="https://adviserinfo.sec.gov/individual/summary/7493251" rel="noopener">Form ADV</a>
+      </nav>
+    </div>
+    <p class="legal">Chase Wealth Management is a state-registered investment adviser. Registration
+    does not imply any level of skill or training, nor does it constitute an endorsement by any
+    securities regulator. Advisory services are offered only to residents of states in which the
+    firm is registered or exempt from registration. Nothing on this page is an offer to buy or sell
+    a security, or a recommendation, or individualized investment, tax, or legal advice; no outcome
+    or result is guaranteed. Investing involves risk, including the possible loss of principal.
+    © 2026 Chase Wealth Management. All rights reserved.</p>
+  </div>
+</footer>
+
+<script>
+// Reveal on scroll — same behavior as index.html / about.html.
+const io = new IntersectionObserver((entries) => {
+  entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } });
+}, { threshold: 0.12 });
+document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+
+// Material ripple — same behavior as index.html / about.html.
+document.querySelectorAll('.btn').forEach(btn => {
+  btn.addEventListener('pointerdown', (ev) => {
+    const r = btn.getBoundingClientRect();
+    const d = Math.max(r.width, r.height);
+    const s = document.createElement('span');
+    s.className = 'ripple';
+    s.style.width = s.style.height = d + 'px';
+    s.style.left = (ev.clientX - r.left - d / 2) + 'px';
+    s.style.top = (ev.clientY - r.top - d / 2) + 'px';
+    btn.appendChild(s);
+    setTimeout(() => s.remove(), 600);
+  });
+});
+</script>
+
+</body>
+</html>
