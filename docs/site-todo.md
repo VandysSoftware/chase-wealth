@@ -132,22 +132,20 @@ The concept files (`art-deco`, `neo-geo`, `neumorphic`, `modernist`, `neo-modern
 | Scheduling | 🟠 Calendly iframe live in `#schedule` on `index.html`, beside the form, pointed at the firm's real event type (`cdalton-chasewm/30min`) — embed height and banner params still unverified against it, see below |
 | Contact form | ❌ renders and validates, but submits nowhere — see below |
 
-### Blocking: the production domain points at the former firm
+### Production domain: cut over to chasewm.com
 
-As of **2026-08-11**, `www.chasewealthmanagement.com` returns a 301 to
-`raymondjames.com/chaserj` — Chase's previous firm. The site is only reachable at
-`https://noahvandy.github.io/chase-wealth/`. Consequences, in severity order:
+The production domain is **chasewm.com** (registered/managed at Squarespace). Until DNS is
+pointed at GitHub Pages, the site is only reachable at
+`https://vandyssoftware.github.io/chase-wealth/`, and every absolute URL on the pages still names
+that GitHub Pages address. A custom domain serves the repo at the **root**, so at cutover repoint
+all of them to `https://chasewm.com/` (dropping the `/chase-wealth` path):
 
-- [ ] **The canonical tag on both pages points off-domain.** It names a URL that redirects to
-  Raymond James, which is an instruction to Google that the canonical version of these pages
-  lives on someone else's site. This is actively harmful to ranking, not merely stale.
-- [ ] **Every schema `@id` and `url`** uses the same unreachable domain, including the
-  `Person.image` that points at the headshot.
-- [ ] **The `og:` and `twitter:` absolutes** are pointed at the GitHub Pages URL precisely so the
-  link preview works today. They must move with everything else at cutover.
-- [ ] **Ask who controls the DNS.** The redirect target suggests the domain may still be
-  administered by, or pointed at, the former firm. That is a conversation before it is a config
-  change.
+- [ ] **Canonical tag on both pages** — currently the GitHub Pages URL; move to chasewm.com.
+- [ ] **Every schema `@id` and `url`**, including the `Person.image` headshot URL.
+- [ ] **The `og:` and `twitter:` absolutes** — pointed at the GitHub Pages URL so the link preview
+  works today; they must move with everything else at cutover.
+- [ ] **Add the `CNAME` file** (`chasewm.com`) plus DNS records (apex A records + a `www` CNAME to
+  `vandyssoftware.github.io`), then enable Enforce HTTPS once GitHub validates the domain.
 
 **Do not** add an AUM figure or an aggregate rating to the shipped pages — the client prohibits publishing AUM, and there is no review corpus to aggregate. Note that publishing the *fee schedule* (a rate applied to a client's own portfolio) is not the same thing as publishing firm AUM, and is explicitly wanted.
 
