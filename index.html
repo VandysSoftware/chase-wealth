@@ -609,38 +609,6 @@ header {
   .faq-item summary .chev { transition: none; }
 }
 
-/* ---------- Reviews ---------- */
-/* PLACEHOLDER SECTION — not for publish. See the block comment on the markup below. */
-/* Top padding kept low on purpose: .philosophy already contributes 80px of bottom padding
-   above this, so the gap to the quote is that 80px + this. */
-.reviews { padding: 24px 0 0; }
-.review-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 24px; }
-@media (max-width: 860px) { .review-grid { grid-template-columns: 1fr; max-width: 520px; margin: 0 auto; } }
-.review {
-  background: var(--surface);
-  border-radius: var(--r-md);
-  box-shadow: var(--e2);
-  padding: 30px 30px 28px;
-  display: flex; flex-direction: column; gap: 16px;
-}
-.review .mark {
-  font-family: var(--display); font-size: 56px; line-height: 0.5; height: 26px; color: var(--ink);
-}
-.review blockquote {
-  margin: 0; font-size: 18px; font-weight: 600; color: var(--ink);
-  line-height: 1.55; letter-spacing: -0.01em;
-}
-.review .who { margin-top: auto; padding-top: 6px; display: flex; flex-direction: column; gap: 3px; }
-.review cite {
-  font-style: normal; font-size: 13px; font-weight: 700;
-  letter-spacing: 0.1em; text-transform: uppercase; color: var(--primary);
-}
-.review .who span { font-size: 13px; color: var(--muted); }
-.reviews-note {
-  max-width: 720px; margin: 30px auto 0; text-align: center;
-  font-size: 13px; line-height: 1.7; color: var(--muted);
-}
-
 /* ---------- Philosophy: stance row + quote ---------- */
 .philosophy { padding: 96px 0 80px; }
 /* Deliberately NOT a dark band. Windle reserves its single inversion for the CTA; here that
@@ -1188,67 +1156,6 @@ footer .legal { margin-top: 36px; padding-top: 24px; border-top: 1px solid var(-
         more intentional with the resources they have been entrusted with.</blockquote>
         <figcaption><cite>Chase Dalton · Owner &amp; Advisor</cite></figcaption>
       </figure>
-    </div>
-  </section>
-
-  <!-- ==================================================================================
-       REVIEWS — PLACEHOLDER, NOT FOR PUBLISH.
-       Every quote and every attribution below is STUBBED (bracketed) sample content. This
-       section must NOT go live until real, client-supplied testimonials exist and clear
-       SEC/FINRA advertising review, because third-party testimonials trigger the SEC
-       Marketing Rule: required disclosures (whether the person is a current client, whether
-       they were compensated, and any material conflicts) must accompany them, and the firm
-       has prohibited publishing any testimonial without that corpus in place.
-       Deliberately absent, and must stay absent until the above is satisfied:
-         - star ratings and any AggregateRating (the firm prohibits an aggregate rating);
-         - Review / AggregateRating JSON-LD (adding schema for fabricated or
-           disclosure-incomplete testimonials is worse than none — do not add it here).
-       Also not wired: no "#reviews" link in the primary nav, on purpose, so this stays
-       unpromoted until it is real. Replace the brackets, add the disclosure line, run it
-       through review, THEN add schema + nav.
-       ================================================================================== -->
-  <section class="reviews" id="reviews">
-    <div class="wrap">
-      <div class="sec-head" style="text-align:center; margin-inline:auto;">
-        <span class="label reveal">Reviews</span>
-        <h2 class="reveal">What clients say</h2>
-        <p class="reveal">In their words, on what it's like to work with a fee-only advisor whose
-        only client is you.</p>
-      </div>
-      <div class="review-grid">
-        <article class="review reveal">
-          <div class="mark" aria-hidden="true">&ldquo;</div>
-          <blockquote>We came in with accounts scattered across five places and left with one
-          written plan. Chase walked us through every line until it made sense, and nothing was ever
-          being sold to us.</blockquote>
-          <div class="who">
-            <cite>[First name L.]</cite>
-            <span>[Client since 20XX]</span>
-          </div>
-        </article>
-        <article class="review reveal">
-          <div class="mark" aria-hidden="true">&ldquo;</div>
-          <blockquote>The fee is one number, in writing, and it doesn't move based on what we own.
-          After years of never quite knowing how our old advisor got paid, that clarity was the whole
-          reason we switched.</blockquote>
-          <div class="who">
-            <cite>[First name L.]</cite>
-            <span>[Retired · Kansas City]</span>
-          </div>
-        </article>
-        <article class="review reveal">
-          <div class="mark" aria-hidden="true">&ldquo;</div>
-          <blockquote>He coordinated the tax side with our CPA before year-end instead of after.
-          That kind of planning ahead is exactly what we'd been missing.</blockquote>
-          <div class="who">
-            <cite>[First name L.]</cite>
-            <span>[Business owner]</span>
-          </div>
-        </article>
-      </div>
-      <p class="reviews-note reveal">[ Placeholder reviews. Content and attribution are stubbed.
-      Testimonial disclosures required by the SEC Marketing Rule (client status, whether compensated,
-      and material conflicts) to appear here before publishing. ]</p>
     </div>
   </section>
 
